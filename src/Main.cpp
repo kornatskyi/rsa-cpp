@@ -49,7 +49,7 @@ int compute_d(int e)
 
 
 
-int modeOfLargeNumberToThePower(int number, int power, int divisor) {
+int modulusOfLargeNumberToThePower(int number, int power, int divisor) {
 
 int temp = number % divisor;
 
@@ -62,20 +62,46 @@ for (int i = 1; i < power; i++)
 
 }
 
+
 int main(int, char **)
 {
 
     int e = choose_e();
     int d = compute_d(e);
 
-    int publicKey[2] = {N, e};
-    int privateKey[2] = {N, d};
+    int publicKey[2] = {e, N};
+    int privateKey[2] = {d, N};
+
+    int M = 1;
 
     std::cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << std::endl;
     std::cout << "Private Key: " << privateKey[0] << " " << privateKey[1] << std::endl;
+    std::cout << "Message: " << M  << std::endl;
 
+    int E = modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
+    std::cout << "Encrypted: " << E  << std::endl;
+    int D = modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
+    std::cout << "Decrypted: " << D  << std::endl;
+    
+    
 
-
-    // std::cout << modeOfLargeNumberToThePower(2, 3, 5) << std::endl;
+    // std::cout << modulusOfLargeNumberToThePower(2, 3, 5) << std::endl;
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
