@@ -1,0 +1,4 @@
+
+int generatePrimeNumber();
+
+void Log();
