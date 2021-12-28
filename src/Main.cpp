@@ -5,11 +5,11 @@ using namespace std;
 
 // int generatePrimeNumber();
 
-void Log() {
+// void Log()
+// {
 
-    cout << "Hello" << endl;
-}
-
+//     cout << "Hello" << endl;
+// }
 
 int p = 31;
 int q = 11;
@@ -71,27 +71,65 @@ int modulusOfLargeNumberToThePower(int number, int power, int divisor)
     return temp;
 }
 
+class Log
+{
+public:
+    const int LogLevelError = 0;
+    const int LogLevelWarning = 1;
+    const int LogLevelInfo = 2;
+
+private:
+    int m_LogLevel = LogLevelInfo;
+
+public:
+    void SetLevel(int level)
+    {
+        m_LogLevel = level;
+    }
+
+    void Error(const char *message)
+    {
+        if (m_LogLevel >= LogLevelError)
+            cout << "[ERROR]: " << message << endl;
+    }
+    void Warn(const char *message)
+    {
+        if (m_LogLevel >= LogLevelWarning)
+            cout << "[WARNING]: " << message << endl;
+    }
+
+    void Info(const char *message)
+    {
+        if (m_LogLevel >= LogLevelInfo)
+            cout << "[INFO ]: " << message << endl;
+    }
+};
+
 int main(int, char **)
 {
 
-    // generatePrimeNumber();
+    // int e = choose_e();
+    // int d = compute_d(e);
 
-    int e = choose_e();
-    int d = compute_d(e);
+    // int publicKey[2] = {e, N};
+    // int privateKey[2] = {d, N};
 
-    int publicKey[2] = {e, N};
-    int privateKey[2] = {d, N};
+    // int M = 311;
 
-    int M = 311;
+    // cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << endl;
+    // cout << "Private Key: " << privateKey[0] << " " << privateKey[1] << endl;
+    // cout << "Message: " << M << endl;
 
-    cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << endl;
-    cout << "Private Key: " << privateKey[0] << " " << privateKey[1] << endl;
-    cout << "Message: " << M << endl;
+    // int E = modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
+    // cout << "Encrypted: " << E << endl;
+    // int D = modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
+    // cout << "Decrypted: " << D << endl;
 
-    int E = modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
-    cout << "Encrypted: " << E << endl;
-    int D = modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
-    cout << "Decrypted: " << D << endl;
+    Log log;
+    log.SetLevel(log.LogLevelWarning);
+    log.Warn("Hello!");
+    log.Error("Hello!");
+    log.Info("Hello!");
 
     // cout << modulusOfLargeNumberToThePower(2, 3, 5) << endl;
     return 0;

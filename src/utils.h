@@ -1,4 +1,5 @@
+#pragma once
 
 int generatePrimeNumber();
 
-void Log();
+// void Log();

@@ -1,17 +1,10 @@
 #include <iostream>
+#include "utils.h"
 
-
-
-int generatePrimeNumber() {
-
-    Log();
+int generatePrimeNumber()
+{
 
     std::cout << "Hello prime number" << std::endl;
 
     return 0;
-
-
 }
-
-
-int x = generatePrimeNumber();
