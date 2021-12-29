@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include "utils.h"
+#include "RSA.h"
 using namespace std;
 
 // int generatePrimeNumber();
@@ -108,6 +109,9 @@ public:
 int main(int, char **)
 {
 
+    RSA rsa;
+
+    cout <<  rsa.N << endl;
     // int e = choose_e();
     // int d = compute_d(e);
 
