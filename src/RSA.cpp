@@ -24,11 +24,6 @@ public:
         T = (p - 1) * (q - 1);
     }
 
-    ~RSA()
-    {
-        std::cout << "Destroyed!" << std::endl;
-    }
-
     int gcd(int a, int b)
     {
         if (b == 0)

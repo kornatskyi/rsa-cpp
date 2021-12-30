@@ -1,10 +1,31 @@
 #include <iostream>
+#include <stdlib.h> /* srand, rand */
+
 #include "utils.h"
 
-int generatePrimeNumber()
+// Check if number is prime buy simple brut force
+bool isPrime(int number)
 {
 
-    std::cout << "Hello prime number" << std::endl;
+    for (int i = 2; i < number; i++)
+    {
+        if (number % i == 0)
+        {
+            return false;
+        }
+    }
 
-    return 0;
+    return true;
+}
+
+int generatePrimeNumber(int range)
+{
+
+    int number = 0;
+    while (!isPrime(number))
+    {
+        number++;
+    }
+
+    return number;
 }
