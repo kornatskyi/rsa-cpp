@@ -1,53 +1,77 @@
 #include <iostream>
 #include <math.h>
+#include <stdlib.h> /* srand, rand */
+#include <time.h>
+#include <exception>
+#include <string>
+#include <bitset>
+
 #include "utils.h"
 #include "RSA.h"
 #include "Log.h"
 using namespace std;
 
-// int generatePrimeNumber();
-
-// void Log()
-// {
-
-//     cout << "Hello" << endl;
-// }
+const char *decToBin(std::string message, int number)
+{
+    std::string binary = std::bitset<32>(number).to_string(); // to binary
+    cout << message << ": " << binary << endl;
+}
 
 int main(int, char **)
 {
 
-    cout << generatePrimeNumber(30, 31) << endl;
+    Log logger;
+    // Seed pseudo-random number generator
+    // Should be seeded only once before the program execution
+    srand(time(NULL));
 
-    int firsPrime = generatePrimeNumber(100, 200);
-    int secodePrime = generatePrimeNumber(100, 200);
+    int primeNumberRange[2];
+    primeNumberRange[0] = 300;
+    primeNumberRange[1] = 500;
+
+    int firsPrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1]);
+    int secodePrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1]);
+    int regenerationCorrection = 1;
+    while (firsPrime == secodePrime)
+    {
+        logger.info("Regenerating the second prime number");
+        secodePrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1] + regenerationCorrection);
+        regenerationCorrection++;
+        /* code */
+    }
 
     cout << "First prime number: " << firsPrime << "\n"
          << "Secode prime number: " << secodePrime << endl;
 
-    RSA rsa(firsPrime, secodePrime);
+    try
+    {
+        RSA rsa(firsPrime, secodePrime);
+        int e = rsa.choose_e();
+        int d = rsa.compute_d(e);
+        int number = rsa.gcd(e, rsa.T);
 
-    int e = rsa.choose_e();
-    int d = rsa.compute_d(e);
+        int publicKey[2] = {e, rsa.N};
+        int privateKey[2] = {d, rsa.N};
 
-    int publicKey[2] = {e, rsa.N};
-    int privateKey[2] = {d, rsa.N};
+        int M = 5;
 
-    int M = 311;
+        cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << endl;
+        cout
+            << "Private Key: " << privateKey[0] << " " << privateKey[1] << endl;
 
-    cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << endl;
-    cout << "Private Key: " << privateKey[0] << " " << privateKey[1] << endl;
-    cout << "Message: " << M << endl;
+        cout
+            << "Euler's totient function: " << rsa.T << endl;
+        cout << "Message: " << M << endl;
 
-    int E = rsa.modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
-    cout << "Encrypted: " << E << endl;
-    int D = rsa.modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
-    cout << "Decrypted: " << D << endl;
-
-    Log log;
-    log.setLevel(Log::LogLevelError);
-    log.warn("Hello!");
-    log.error("Hello!");
-    log.info("Hello!");
+        int E = rsa.modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
+        cout << "Encrypted: " << E << endl;
+        int D = rsa.modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
+        cout << "Decrypted: " << D << endl;
+    }
+    catch (const char *msg)
+    {
+        logger.error(msg);
+    }
 
     return 0;
 }

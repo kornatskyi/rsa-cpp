@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include "Log.h"
 
@@ -11,17 +12,20 @@ public:
     int T;
     Log logger;
 
-    RSA(int p, int q)
+    RSA(int gP, int gQ)
     {
 
-        if (p == q)
+        if (gP == gQ)
         {
-
-            logger.error("q(firs prime number) cannot be equal to p(second prime number).");
+            throw "q(firs prime number) cannot be equal to p(second prime number).";
         }
 
-        this->p = p;
-        this->q = q;
+        // this->p = gP;
+        // this->q = gQ;
+        // p = 347;
+        // q = 419;
+        p = 331;
+        q = 401;
         N = p * q;
         T = (p - 1) * (q - 1);
     }
@@ -70,14 +74,36 @@ public:
 
     int modulusOfLargeNumberToThePower(int number, int power, int divisor)
     {
-
+        logger.info(("Number: " + std::to_string(number)).c_str());
+        logger.info(("Power: " + std::to_string(power)).c_str());
+        logger.info(("divisor: " + std::to_string(divisor)).c_str());
         int temp = number % divisor;
 
         for (int i = 1; i < power; i++)
         {
+            std::cout << temp * number << "%" << divisor << std::endl;
+
             temp = (temp * number) % divisor;
             /* code */
         }
         return temp;
     }
 };
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
