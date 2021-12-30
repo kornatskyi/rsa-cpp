@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "Log.h"
+
 class RSA
 {
 public:
@@ -7,17 +9,17 @@ public:
     int q;
     int N;
     int T;
-
-    RSA()
-    {
-        p = 31;
-        q = 11;
-        N = p * q;
-        T = (p - 1) * (q - 1);
-    }
+    Log logger;
 
     RSA(int p, int q)
     {
+
+        if (p == q)
+        {
+
+            logger.error("q(firs prime number) cannot be equal to p(second prime number).");
+        }
+
         this->p = p;
         this->q = q;
         N = p * q;

@@ -1,5 +1,5 @@
 #pragma once
 
-int generatePrimeNumber(int range);
+int generatePrimeNumber(int from, int to);
 
 // void Log();

@@ -16,33 +16,38 @@ using namespace std;
 int main(int, char **)
 {
 
-    cout << generatePrimeNumber(16) << endl;
+    cout << generatePrimeNumber(30, 31) << endl;
 
-    // RSA rsa(5, 7);
+    int firsPrime = generatePrimeNumber(100, 200);
+    int secodePrime = generatePrimeNumber(100, 200);
 
-    // int e = rsa.choose_e();
-    // int d = rsa.compute_d(e);
+    cout << "First prime number: " << firsPrime << "\n"
+         << "Secode prime number: " << secodePrime << endl;
 
-    // int publicKey[2] = {e, rsa.N};
-    // int privateKey[2] = {d, rsa.N};
+    RSA rsa(firsPrime, secodePrime);
 
-    // int M = 311;
+    int e = rsa.choose_e();
+    int d = rsa.compute_d(e);
 
-    // cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << endl;
-    // cout << "Private Key: " << privateKey[0] << " " << privateKey[1] << endl;
-    // cout << "Message: " << M << endl;
+    int publicKey[2] = {e, rsa.N};
+    int privateKey[2] = {d, rsa.N};
 
-    // int E = rsa.modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
-    // cout << "Encrypted: " << E << endl;
-    // int D = rsa.modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
-    // cout << "Decrypted: " << D << endl;
+    int M = 311;
 
-    // Log log;
-    // log.setLevel(Log::LogLevelError);
-    // log.warn("Hello!");
-    // log.error("Hello!");
-    // log.info("Hello!");
+    cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << endl;
+    cout << "Private Key: " << privateKey[0] << " " << privateKey[1] << endl;
+    cout << "Message: " << M << endl;
 
-    // cout << modulusOfLargeNumberToThePower(2, 3, 5) << endl;
+    int E = rsa.modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
+    cout << "Encrypted: " << E << endl;
+    int D = rsa.modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
+    cout << "Decrypted: " << D << endl;
+
+    Log log;
+    log.setLevel(Log::LogLevelError);
+    log.warn("Hello!");
+    log.error("Hello!");
+    log.info("Hello!");
+
     return 0;
 }
