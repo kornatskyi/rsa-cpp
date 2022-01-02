@@ -9,6 +9,7 @@
 #include "utils.h"
 #include "RSA.h"
 #include "Log.h"
+#include "Calculator.h"
 using namespace std;
 
 const char *decToBin(std::string message, int number)
@@ -20,58 +21,73 @@ const char *decToBin(std::string message, int number)
 int main(int, char **)
 {
 
-    Log logger;
-    // Seed pseudo-random number generator
-    // Should be seeded only once before the program execution
-    srand(time(NULL));
+    // Log logger;
+    // // Seed pseudo-random number generator
+    // // Should be seeded only once before the program execution
+    // srand(time(NULL));
 
-    int primeNumberRange[2];
-    primeNumberRange[0] = 300;
-    primeNumberRange[1] = 500;
+    // int primeNumberRange[2];
+    // primeNumberRange[0] = 300;
+    // primeNumberRange[1] = 500;
 
-    int firsPrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1]);
-    int secodePrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1]);
-    int regenerationCorrection = 1;
-    while (firsPrime == secodePrime)
-    {
-        logger.info("Regenerating the second prime number");
-        secodePrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1] + regenerationCorrection);
-        regenerationCorrection++;
-        /* code */
-    }
+    // int firsPrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1]);
+    // int secodePrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1]);
+    // int regenerationCorrection = 1;
+    // while (firsPrime == secodePrime)
+    // {
+    //     logger.info("Regenerating the second prime number");
+    //     secodePrime = generatePrimeNumber(primeNumberRange[0], primeNumberRange[1] + regenerationCorrection);
+    //     regenerationCorrection++;
+    //     /* code */
+    // }
 
-    cout << "First prime number: " << firsPrime << "\n"
-         << "Secode prime number: " << secodePrime << endl;
+    // cout << "First prime number: " << firsPrime << "\n"
+    //      << "Secode prime number: " << secodePrime << endl;
 
-    try
-    {
-        RSA rsa(firsPrime, secodePrime);
-        int e = rsa.choose_e();
-        int d = rsa.compute_d(e);
-        int number = rsa.gcd(e, rsa.T);
+    // try
+    // {
 
-        int publicKey[2] = {e, rsa.N};
-        int privateKey[2] = {d, rsa.N};
+    //     RSA rsa(firsPrime, secodePrime);
+    //     int e = rsa.choose_e();
+    //     int d = rsa.compute_d(e);
+    //     int number = rsa.gcd(e, rsa.T);
 
-        int M = 5;
+    //     int publicKey[2] = {e, rsa.N};
+    //     int privateKey[2] = {d, rsa.N};
 
-        cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << endl;
-        cout
-            << "Private Key: " << privateKey[0] << " " << privateKey[1] << endl;
+    //     int M = 5;
 
-        cout
-            << "Euler's totient function: " << rsa.T << endl;
-        cout << "Message: " << M << endl;
+    //     cout << "Public Key: " << publicKey[0] << " " << publicKey[1] << endl;
+    //     cout
+    //         << "Private Key: " << privateKey[0] << " " << privateKey[1] << endl;
 
-        int E = rsa.modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
-        cout << "Encrypted: " << E << endl;
-        int D = rsa.modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
-        cout << "Decrypted: " << D << endl;
-    }
-    catch (const char *msg)
-    {
-        logger.error(msg);
-    }
+    //     cout
+    //         << "Euler's totient function: " << rsa.T << endl;
+    //     cout << "Message: " << M << endl;
+
+    //     int E = rsa.modulusOfLargeNumberToThePower(M, publicKey[0], publicKey[1]);
+    //     cout << "Encrypted: " << E << endl;
+    //     int D = rsa.modulusOfLargeNumberToThePower(E, privateKey[0], privateKey[1]);
+    //     cout << "Decrypted: " << D << endl;
+    // }
+    // catch (const char *msg)
+    // {
+    //     logger.error(msg);
+    // }
+
+    Calculator calc;
+    // calc.enterFirsNumber();
 
     return 0;
 }
+/*
+
+
+
+
+
+
+
+
+
+*/
