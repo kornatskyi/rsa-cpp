@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Log.h"
 using namespace std;
 // the following are UBUNTU/LINUX, and MacOS ONLY terminal color codes.
 #define RESET "\033[0m"
@@ -19,40 +20,28 @@ using namespace std;
 #define BOLDCYAN "\033[1m\033[36m"    /* Bold Cyan */
 #define BOLDWHITE "\033[1m\033[37m"   /* Bold White */
 
-class Log
-{
-public:
-    enum Level
-    {
-        LogLevelError = 0,
-        LogLevelWarning,
-        LogLevelInfo,
 
-    };
 
-private:
-    Level m_LogLevel = LogLevelInfo;
 
-public:
-    void setLevel(Level level)
+
+    void Log::setLevel(Level level)
     {
         m_LogLevel = level;
     }
-
-    void error(const char *message)
+    
+    void Log::error(const char *message)
     {
-        if (m_LogLevel >= LogLevelError)
+        if (this->m_LogLevel >= this->LogLevelError)
             cout << RED << "[ERROR]: " << message << RESET << endl;
     }
-    void warn(const char *message)
+    void Log::warn(const char *message)
     {
-        if (m_LogLevel >= LogLevelWarning)
+        if (this->m_LogLevel >= this->LogLevelWarning)
             cout << YELLOW << "[WARNING]: " << message << RESET << endl;
     }
 
-    void info(const char *message)
+    void Log::info(const char *message)
     {
-        if (m_LogLevel >= LogLevelInfo)
+        if (this->m_LogLevel >= this->LogLevelInfo)
             cout << BLUE << "[INFO]: " << message << RESET << endl;
     }
-};

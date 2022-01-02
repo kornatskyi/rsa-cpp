@@ -16,6 +16,7 @@ const char *decToBin(std::string message, int number)
 {
     std::string binary = std::bitset<32>(number).to_string(); // to binary
     cout << message << ": " << binary << endl;
+    return NULL;
 }
 
 int main(int, char **)
@@ -75,8 +76,10 @@ int main(int, char **)
     //     logger.error(msg);
     // }
 
-    Calculator calc;
-    // calc.enterFirsNumber();
+    // Calculator calc;
+    // calc.runCalc();
+    // Log logger;
+    // logger.error("Hello");
 
     return 0;
 }

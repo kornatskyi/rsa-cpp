@@ -17,3 +17,5 @@ file(GLOB source_files "${source_dir}/*.cpp")
 set(build_dir "${CMAKE_CURRENT_BINARY_DIR}/build")
 
 file(MAKE_DIRECTORY "${build_dir}")
+
+add_executable(rsa-cpp ${source_files})

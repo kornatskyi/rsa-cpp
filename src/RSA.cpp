@@ -1,18 +1,11 @@
 #include <iostream>
 #include <string>
 
+#include "RSA.h"
 #include "Log.h"
 
-class RSA
-{
-public:
-    int p;
-    int q;
-    int N;
-    int T;
-    Log logger;
 
-    RSA(int gP, int gQ)
+    RSA::RSA(int gP, int gQ)
     {
 
         if (gP == gQ)
@@ -30,7 +23,7 @@ public:
         T = (p - 1) * (q - 1);
     }
 
-    int gcd(int a, int b)
+    int RSA::gcd(int a, int b)
     {
         if (b == 0)
         {
@@ -40,7 +33,7 @@ public:
     }
 
     // choose e such that 1 < e < T and e and T are coprime
-    int choose_e()
+    int RSA::choose_e()
     {
         int e = 0;
         int i = 2;
@@ -56,7 +49,7 @@ public:
         return e;
     }
     // compute d such that d * e = 1 (mod T)
-    int compute_d(int e)
+    int RSA::compute_d(int e)
     {
         int d = 0;
         int i = 1;
@@ -72,7 +65,7 @@ public:
         return d;
     }
 
-    int modulusOfLargeNumberToThePower(int number, int power, int divisor)
+    int RSA::modulusOfLargeNumberToThePower(int number, int power, int divisor)
     {
         logger.info(("Number: " + std::to_string(number)).c_str());
         logger.info(("Power: " + std::to_string(power)).c_str());
@@ -88,7 +81,6 @@ public:
         }
         return temp;
     }
-};
 /*
 
 
