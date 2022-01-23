@@ -1,0 +1,3 @@
+[submodule "libs/bignum"]
+	path = libs/bignum
+	url = https://github.com/kornatskyi/bignum.git
